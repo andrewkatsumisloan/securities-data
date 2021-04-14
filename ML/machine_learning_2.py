@@ -1,10 +1,10 @@
 import pandas as pd
 import numpy as np
 import pickle
-import math
 
-with open('sp500tickers.pickle', 'rb') as f:
+with open('../../sp500tickers.pickle', 'rb') as f:
     tickers = pickle.load(f)
+
 
 def find_spike(array):
     '''
@@ -15,6 +15,7 @@ def find_spike(array):
     df = pd.read_csv('sp500_joined_closes.csv', index_col=0)
     df.fillna(0, inplace=True)
     print(df)
+
 
 def df_normalized(dataframe):
     '''
@@ -45,7 +46,6 @@ def spike_index(ticker):
                 # print((series[count]-series[count-1])/(series[count]))
             else:
                 norm.append(0)
-
 
     # spikes = [(i, x) for i, x in enumerate(norm) if math.fabs(x) > 0.05]
     print('This is len norm', len(norm))

@@ -16,8 +16,8 @@ def aggregate_data():
 
     # Numbers each ticker , iterates through number label and ticker.
     for count, ticker in enumerate(tickers):
-        # For each ticker in stock_data folder set an index that is equal to the datetime column
-        df = pd.read_csv('stock_data/{}.csv'.format(ticker))
+        # For each ticker in SP500_Data folder set an index that is equal to the datetime column
+        df = pd.read_csv('SP500_Data/{}.csv'.format(ticker))
         df.set_index('datetime', inplace=True)
         df.rename(columns = {'close': ticker}, inplace=True)
         df.drop(['open', 'high', 'low', 'volume'], 1, inplace=True)

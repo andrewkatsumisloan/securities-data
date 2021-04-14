@@ -14,7 +14,6 @@ key = 'RFJECPTJLRRH42GDRRFPUBVA7ODHJZON'
 payload = {
     'apikey': key,
     'periodType': 'year',
-    # 'period': '20',
     'frequencyType': 'daily',
     'frequency': '1',
     'endDate': '1618286676000',
@@ -82,7 +81,6 @@ def get_data_tda(reload_sp500=False):
             #
             #     print('failed to get candles from', ticker)
 
-
             # Dump the data
             with open('data.json', 'w') as outfile:
                 json.dump(data1, outfile)
@@ -90,7 +88,7 @@ def get_data_tda(reload_sp500=False):
 
             df = pd.read_json('data.json')
 
-            df.to_csv('stock_data/{}.csv'.format(ticker), index=False)
+            df.to_csv('SP500_Data/Individual/{}.csv'.format(ticker), index=False)
 
 
 
