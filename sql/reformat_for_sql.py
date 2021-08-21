@@ -1,5 +1,6 @@
 import re
 
+
 from lib import JOINED_SP500_PATH
 
 handle = open(JOINED_SP500_PATH, 'r')
