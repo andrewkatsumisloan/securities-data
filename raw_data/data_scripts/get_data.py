@@ -4,7 +4,9 @@ import json
 import bs4 as bs
 import os
 import pickle
+import sys
 
+sys.path.append('../../')
 from lib import PICKLE_PATH, JSON_DATA_PATH
 
 key = 'RFJECPTJLRRH42GDRRFPUBVA7ODHJZON'
@@ -62,9 +64,8 @@ def get_data_tda(reload_sp500=False):
 
         # For each ticker, if the path does not exist for their historical data file...
         for ticker in tickers:
-        # for ticker in ['FCX']:
             # if not os.path.exists('sp500_data/{}'.format(ticker)):
-            #     ret_payl()
+            #     pass
             print(ticker)
             # Get the desired endpoint (ticker specific)
             endpt = format_request(ticker)
@@ -84,11 +85,11 @@ def get_data_tda(reload_sp500=False):
             # Dump the data
             with open(JSON_DATA_PATH, 'w') as outfile:
                 json.dump(data1, outfile)
-            # print(data)
+            # print(data1)
 
             df = pd.read_json(JSON_DATA_PATH)
 
-            df.to_csv('raw_data/individual/{}.csv'.format(ticker), index=False)
+            df.to_csv('../individual/{}.csv'.format(ticker), index=False)
 
 
 def format_request(ticker):
