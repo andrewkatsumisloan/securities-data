@@ -59,8 +59,6 @@ def get_data_tda(reload_sp500=False):
         with open(PICKLE_PATH, "rb") as f:
             tickers = pickle.load(f)
         # If this directory does not exist, create it.
-        if not os.path.exists('raw_data'):
-            os.makedirs('raw_data')
 
         # For each ticker, if the path does not exist for their historical data file...
         for ticker in tickers:
