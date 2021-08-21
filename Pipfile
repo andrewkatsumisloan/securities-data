@@ -13,6 +13,8 @@ bs4 = "*"
 sklearn = "*"
 lxml = "*"
 psycopg2-binary = "*"
+sqlalchemy = "*"
+python-dotenv = "*"
 
 [dev-packages]
 
