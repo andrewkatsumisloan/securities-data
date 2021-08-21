@@ -1,5 +1,4 @@
 import pandas as pd
-import numpy as np
 
 from lib import JOINED_SP500_PATH
 with open(JOINED_SP500_PATH, 'r') as f:
