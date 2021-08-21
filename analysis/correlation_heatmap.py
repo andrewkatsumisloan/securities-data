@@ -29,4 +29,3 @@ def correlation(list):
 
 
 correlation(['AAPL', 'MSFT', 'GE', 'IBM', 'BA'])
-
