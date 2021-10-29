@@ -72,7 +72,7 @@ def get_csv(ticker, float_precision=None):
 
 if __name__ == '__main__':
     access = db_access()
-    # access.update_table(directory_path)
+    
     print(get_csv('MMM'))
     # access.update_all()
     pass

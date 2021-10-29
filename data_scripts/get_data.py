@@ -38,7 +38,7 @@ def list_tickers():
     return tickers
 
 
-# This scrapes the wikipedia for the SP500 using beautiful soup,
+# This scrapes the wikipedia for the SP500 using beautiful soup, creates a list of the current SP500 companies
 def sp500_ticker_list():
     resp = requests.get(
         'https://en.wikipedia.org/wiki/List_of_S%26P_500_companies')
@@ -59,6 +59,7 @@ def sp500_ticker_list():
     return tickers
 
 
+# This grabs the data from the TD Ameritrade API and updates the time series data locally
 def get_data_tda(reload_sp500=False):
     if reload_sp500:
         tickers = sp500_ticker_list()
@@ -100,15 +101,13 @@ def get_data_tda(reload_sp500=False):
 
 
 def format_request(ticker):
-    price_hist_endpoint = r'https://api.tdameritrade.com/v1/marketdata/{}/pricehistory'.format(
-        ticker)
+    price_hist_endpoint = r'https://api.tdameritrade.com/v1/marketdata/{}/pricehistory'.format(ticker)
     return price_hist_endpoint
 
 
 if __name__ == '__main__':
     sp500_ticker_list()
     get_data_tda()
-
 
 
 # Improvements
