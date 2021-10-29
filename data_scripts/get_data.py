@@ -1,25 +1,32 @@
-import requests
-import pandas as pd
-import json
-import bs4 as bs
-import os
-import pickle
 import sys
+import pickle
+import os
+import bs4 as bs
+import json
+import pandas as pd
+import requests
+import math
+import time
 
-sys.path.append('../../')
+sys.path.append('../')
 from lib import PICKLE_PATH, JSON_DATA_PATH
+
 
 key = 'RFJECPTJLRRH42GDRRFPUBVA7ODHJZON'
 
 # price_hist_endpoint = r'https://api.tdameritrade.com/v1/marketdata/{}/pricehistory'.format('FB')
 # price_hist_endpoint = 'https://api.tdameritrade.com/v1/marketdata/FB/pricehistory'
 
+
+# Make more concise later
+current_time = math.floor(time.time()*1000)
+
 payload = {
     'apikey': key,
     'periodType': 'year',
     'frequencyType': 'daily',
     'frequency': '1',
-    'endDate': '1629508302000',
+    'endDate': current_time,
     'startDate': '946719000000',
     'needExtendedHoursData': 'false'
 }
@@ -33,7 +40,8 @@ def list_tickers():
 
 # This scrapes the wikipedia for the SP500 using beautiful soup,
 def sp500_ticker_list():
-    resp = requests.get('https://en.wikipedia.org/wiki/List_of_S%26P_500_companies')
+    resp = requests.get(
+        'https://en.wikipedia.org/wiki/List_of_S%26P_500_companies')
     soup = bs.BeautifulSoup(resp.text, 'lxml')
     # print(soup.text)
     table = soup.find('table', {'class': 'wikitable sortable'})
@@ -47,7 +55,7 @@ def sp500_ticker_list():
     # Save the sp500 tickers wb = write bits
     with open(PICKLE_PATH, "wb") as f:
         pickle.dump(tickers, f)
-    print(tickers)
+    # print(tickers)
     return tickers
 
 
@@ -60,6 +68,7 @@ def get_data_tda(reload_sp500=False):
             tickers = pickle.load(f)
         # If this directory does not exist, create it.
 
+        # print(tickers)
         # For each ticker, if the path does not exist for their historical data file...
         for ticker in tickers:
             # if not os.path.exists('sp500_data/{}'.format(ticker)):
@@ -87,21 +96,27 @@ def get_data_tda(reload_sp500=False):
 
             df = pd.read_json(JSON_DATA_PATH)
 
-            df.to_csv('../individual/{}.csv'.format(ticker), index=False)
+            df.to_csv('../raw_data/individual/{}.csv'.format(ticker), index=False)
 
 
 def format_request(ticker):
-    price_hist_endpoint = r'https://api.tdameritrade.com/v1/marketdata/{}/pricehistory'.format(ticker)
+    price_hist_endpoint = r'https://api.tdameritrade.com/v1/marketdata/{}/pricehistory'.format(
+        ticker)
     return price_hist_endpoint
 
 
 if __name__ == '__main__':
-    # sp500_ticker_list()
+    sp500_ticker_list()
     get_data_tda()
+
+
+
+# Improvements
+# Since companies in the SP500 are constantly changing (as companies are delisted and added to the index)
+# it makes sense to run th sp500_ticker_list() before each call to update the local data.
 
 
 # Ideas
 # Make a command line tool that allows you to request any DMA from a given ticker
-
 
 
