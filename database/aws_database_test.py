@@ -3,7 +3,6 @@ import os
 import pandas as pd
 import sqlalchemy as sa
 
-
 sys.path.append('../')
 from data_scripts.get_data import sp500_ticker_list
 
@@ -74,5 +73,4 @@ if __name__ == '__main__':
     access = db_access()
     
     print(get_csv('MMM'))
-    # access.update_all()
-    pass
+    access.update_all()

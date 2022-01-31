@@ -5,6 +5,7 @@ import sys
 sys.path.append('../../')
 from lib import JOINED_SP500_PATH, PICKLE_PATH
 
+# import JOINED_SP500_PATH, PICKLE_PATH
 
 # Make a dataframe that contains the closing prices of all companies from the last 20 years.
 def aggregate_data():
@@ -17,7 +18,7 @@ def aggregate_data():
     # Numbers each ticker , iterates through number label and ticker.
     for count, ticker in enumerate(tickers):
         # For each ticker in SP500_Data folder set an index that is equal to the datetime column
-        df = pd.read_csv('../individual/{}.csv'.format(ticker))
+        df = pd.read_csv('../raw_data/individual/{}.csv'.format(ticker))
         df.set_index('datetime', inplace=True)
         df.rename(columns = {'close': ticker}, inplace=True)
         df.drop(['open', 'high', 'low', 'volume'], 1, inplace=True)
