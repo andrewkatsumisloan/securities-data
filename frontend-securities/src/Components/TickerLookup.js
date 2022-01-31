@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from "react-router-dom";
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import './TickerLookup.css'
 
@@ -8,8 +8,12 @@ const TickerLookup = () => {
     const [ticker, setTicker] = useState('');
     const [tickerData, setTickerData] = useState(null);
 
-    async function getHistoricalData() {
-        const response = await fetch("/http://localhost:5000/app/ticker_entry", {
+    useEffect(() => {
+        console.log(tickerData)
+    }, [tickerData]);
+
+    async function getHistoricalData(ticker) {
+        const response = await fetch("http://localhost:5000/ticker_entry", {
             method: 'POST', // *GET, POST, PUT, DELETE, etc.
             mode: 'cors', // no-cors, *cors, same-origin
             cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
@@ -18,13 +22,12 @@ const TickerLookup = () => {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                'ticker': 'AAPL'
+                'ticker': ticker
             })
         })
             .then(response => response.json())
                 .then(result => {
                     setTickerData(result)
-                    console.log(tickerData)
                 })
     }
 
