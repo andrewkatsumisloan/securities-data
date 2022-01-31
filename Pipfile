@@ -15,6 +15,7 @@ lxml = "*"
 psycopg2-binary = "*"
 sqlalchemy = "*"
 python-dotenv = "*"
+flask = "*"
 
 [dev-packages]
 

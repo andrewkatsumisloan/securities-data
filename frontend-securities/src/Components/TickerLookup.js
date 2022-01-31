@@ -8,8 +8,24 @@ const TickerLookup = () => {
     const [ticker, setTicker] = useState('');
     const [tickerData, setTickerData] = useState(null);
 
-    const getHistoricalData = async () => {
-        console.log('Get Historical Data')
+    async function getHistoricalData() {
+        const response = await fetch("/http://localhost:5000/app/ticker_entry", {
+            method: 'POST', // *GET, POST, PUT, DELETE, etc.
+            mode: 'cors', // no-cors, *cors, same-origin
+            cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+            credentials: 'same-origin', // include, *same-origin, omit
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                'ticker': 'AAPL'
+            })
+        })
+            .then(response => response.json())
+                .then(result => {
+                    setTickerData(result)
+                    console.log(tickerData)
+                })
     }
 
     const handleInputChange = (e) => {

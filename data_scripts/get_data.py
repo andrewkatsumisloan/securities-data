@@ -17,7 +17,6 @@ key = 'RFJECPTJLRRH42GDRRFPUBVA7ODHJZON'
 # price_hist_endpoint = r'https://api.tdameritrade.com/v1/marketdata/{}/pricehistory'.format('FB')
 # price_hist_endpoint = 'https://api.tdameritrade.com/v1/marketdata/FB/pricehistory'
 
-
 # Make more concise later
 current_time = math.floor(time.time()*1000)
 
