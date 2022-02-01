@@ -16,16 +16,28 @@ def about():
 @app.route('/ticker_entry', methods=['GET', 'POST'])
 def get_ticker_data():
     if request.method == 'POST':  
+        # print('This is the request: ', request)
         ticker = request.get_json(['ticker'])
         ticker = ticker['ticker']
-        print('This endpoint hit')
         df = pd.read_csv('./sp_joined_closes.csv')
-        print(df)
-        # ticker = ticker.tostring()
-        ret_val = df[ticker]
-        ret_val = ret_val.to_json(orient='records')
-        print(ret_val)
-        return ret_val
+
+        # print(df)
+        trimmed_df = (df[[ticker, 'datetime']].dropna())
+        print(trimmed_df)
+
+        dates = trimmed_df['datetime'].tolist()
+        values = trimmed_df[ticker].tolist()
+
+        ret_list = []
+        for i, x in enumerate(dates): 
+            ret_list.append({'date': x, 'value': values[i]})
+
+        return jsonify(ret_list)
+        # ret_json = jsonify({'dates': dates,
+        #                     'values': values})
+        # print(ret_json)
+        # return ret_json
+        
 
     if request.method == 'GET':
         print('This endpoint hit')

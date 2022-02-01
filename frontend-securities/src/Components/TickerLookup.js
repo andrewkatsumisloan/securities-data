@@ -3,10 +3,15 @@ import { Link } from "react-router-dom";
 import { useState, useEffect } from 'react';
 
 import './TickerLookup.css'
+import TickerGraph from './TickerGraph';
 
 const TickerLookup = () => {
     const [ticker, setTicker] = useState('');
-    const [tickerData, setTickerData] = useState(null);
+    const [tickerData, setTickerData] = useState([{
+        'dates': '1/1/2020',
+        'values': "5"
+    }]
+);
 
     useEffect(() => {
         console.log(tickerData)
@@ -27,6 +32,7 @@ const TickerLookup = () => {
         })
             .then(response => response.json())
                 .then(result => {
+                    console.log(result)
                     setTickerData(result)
                 })
     }
@@ -51,6 +57,13 @@ const TickerLookup = () => {
                             value="Submit" 
                             onClick={() => getHistoricalData(ticker)} />
                 </div>
+                <div > 
+                    <TickerGraph 
+                        tickerData={tickerData}
+                        tickerSymbol={ticker}> 
+                    </TickerGraph>  
+                </div>
+
         </div>
     )
 }
