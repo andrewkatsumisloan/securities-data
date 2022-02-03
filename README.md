@@ -2,16 +2,7 @@ Work in progress.
 
 Application that compiles time series data for all of the S&P500 companies from the TDA API, uploads them to a AWS PostgreSQL database, and allows users to conduct basic analysis. 
 
-Eventually will have a frontend interface that gets company data from RDS and renders time series data to user.
+Built using a JavaScript/React frontend with a Python/Flask backend.
 
-
-
-TO DO: 
-1) Develop Frontend/API
-2) Docker-ize application 
-3) Automate updates to server (run one script that grabs new data from the TDA API, saves it locally, then updates it on the RDS instance), possibly find a more efficient way to do this (TDA API directly to RDS instance, remove intermediate step?)
-4) Clean-up
-5) Allow users to perform basic analysis and ML operations on company datasets.
-
-
-
+Example of basic interface, enter a ticker symbol, receive historical time series data for given company.
+<img width="1334" alt="Screen Shot 2022-02-01 at 6 29 02 AM" src="https://user-images.githubusercontent.com/30994664/151987173-6ef603db-b6bd-4c28-869e-6e893b171974.png">
