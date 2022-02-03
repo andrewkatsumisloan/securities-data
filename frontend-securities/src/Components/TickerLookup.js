@@ -13,9 +13,9 @@ const TickerLookup = () => {
     }]
 );
 
-    useEffect(() => {
-        console.log(tickerData)
-    }, [tickerData]);
+    // useEffect(() => {
+    //     console.log(tickerData)
+    // }, [tickerData]);
 
     async function getHistoricalData(ticker) {
         const response = await fetch("http://localhost:5000/ticker_entry", {
