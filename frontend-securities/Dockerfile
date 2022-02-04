@@ -1,6 +1,6 @@
 FROM node:14.17.3-buster
 
-WORKDIR /quantitativus-frontend
+WORKDIR /frontend-securities
 
 EXPOSE 3000
 

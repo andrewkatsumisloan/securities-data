@@ -1,0 +1,41 @@
+version: '3.7'
+
+services:
+  qfrontend:
+    container_name: q-frontend
+    restart: always
+    build:
+      context: ./frontend-securities
+      dockerfile: Dockerfile
+    volumes:
+      - ./frontend-securities/:/frontend-securities
+    ports:
+      - 3000:3000
+    links:
+      - qbackend
+    networks:
+      - default
+
+    command: npm run start
+  qbackend:
+    container_name: q-backend
+    restart: always
+    build:
+      context: ./backend-securities
+      dockerfile: Dockerfile
+    volumes:
+      - ./backend-securities:/backend-securities
+    ports:
+      - 5000:5000
+    networks:
+      - default
+
+#    command:  uwsgi --http 0.0.0.0:5000 --master  --wsgi-file /tag_dock-app/gui/web/app/tag_server.py --ini /tag_dock-app/gui/web/app/tag_server.ini --http-to /tmp/tag_server.sock
+    command: pipenv run flask run
+
+    environment:
+        - PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+        - PYTHONPATH=/backend-securities
+networks:
+  default:
+    external: false
