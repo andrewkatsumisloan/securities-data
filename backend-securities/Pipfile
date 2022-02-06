@@ -17,6 +17,7 @@ sqlalchemy = "*"
 python-dotenv = "*"
 flask = "*"
 flask-cors = "*"
+uwsgi = "*"
 
 [dev-packages]
 

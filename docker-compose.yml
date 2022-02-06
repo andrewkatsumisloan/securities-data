@@ -30,9 +30,8 @@ services:
     networks:
       - default
 
-#    command:  uwsgi --http 0.0.0.0:5000 --master  --wsgi-file /tag_dock-app/gui/web/app/tag_server.py --ini /tag_dock-app/gui/web/app/tag_server.ini --http-to /tmp/tag_server.sock
-    command: pipenv run flask run
-
+    command:  uwsgi --http 0.0.0.0:5000 --master  --wsgi-file /backend-securities/server.py --ini /backend-securities/server.ini --http-to /tmp/server.sock
+    
     environment:
         - PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
         - PYTHONPATH=/backend-securities

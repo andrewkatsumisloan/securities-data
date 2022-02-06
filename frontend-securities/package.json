@@ -37,6 +37,6 @@
       "last 1 firefox version",
       "last 1 safari version"
     ],
-    "proxy": "http://quantitativus-backend:5000"
+    "proxy": "http://q-backend:5000"
   }
 }
