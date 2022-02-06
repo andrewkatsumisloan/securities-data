@@ -1,9 +1,6 @@
 import { Link } from 'react-router-dom';
 
 import './App.css';
-import LoginButton from './Components/LoginButton';
-import LogoutButton from './Components/LogoutButton';
-import Profile from './Components/Profile';
 import TickerLookup from './Components/TickerLookup';
 
 import './App.css'
