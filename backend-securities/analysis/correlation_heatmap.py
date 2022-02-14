@@ -3,7 +3,7 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 import sys
 
-sys.path.append('../')
+sys.path.append('./')
 from lib import JOINED_SP500_PATH
 
 # Correlation table
@@ -25,9 +25,23 @@ def correlation(list):
         # corr_table = df.corr().to_dict()
         corr_table = df.corr()
         
+        # print(corr_table)
+        # print(type(corr_table))
 
-        print(corr_table)
+        ret_list = []
+        for x in corr_table: 
+            ret_list.append(corr_table[x].tolist())
+            # print(corr_table[x])
+        
+        for x in ret_list: 
+            pass
+
+        print(ret_list)
+
+        sns.heatmap(corr_table, annot=True, annot_kws={"size":8})
+        plt.savefig('./corr_heatmap.png')
+
         plt.show()
 
 
-correlation(['AAPL', 'MSFT', 'GE', 'IBM', 'BA'])
+correlation(['AAPL', 'MSFT', 'GM'])

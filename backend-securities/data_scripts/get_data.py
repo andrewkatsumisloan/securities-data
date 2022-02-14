@@ -11,7 +11,6 @@ import time
 sys.path.append('../')
 from lib import PICKLE_PATH, JSON_DATA_PATH
 
-
 key = 'RFJECPTJLRRH42GDRRFPUBVA7ODHJZON'
 
 # price_hist_endpoint = r'https://api.tdameritrade.com/v1/marketdata/{}/pricehistory'.format('FB')

@@ -1,5 +1,7 @@
 from flask import Flask, jsonify, request
 from flask_cors import CORS
+import seaborn as sns
+import matplotlib.pyplot as plt
 import pandas as pd
 
 app = Flask(__name__)
@@ -62,10 +64,26 @@ def correlation():
             array = main_df[ticker_list[a]].values
             df['{}'.format(ticker_list[a])] = array
 
-        corr_table = df.corr().to_dict()
-    
+        corr_table = df.corr()
+        # sns.heatmap(corr_table, annot=True, annot_kws={"size":8})
+        # plt.savefig('./corr_heatmap.png')
+
+        ret_list = []
+        for x in corr_table: 
+            ret_list.append(corr_table[x].tolist())
+            # print(corr_table[x])
+        
+        for x in ret_list: 
+            pass
+        
+        print(ret_list)
+        
         # print(corr_table)
-        return corr_table
+        return jsonify(ret_list)
+
+@app.route('/get_correlation_image', methods=['GET'])
+def correlation_image():
+    pass
 
 
 if __name__ == '__main__':
