@@ -43,5 +43,30 @@ def get_ticker_data():
         print('This endpoint hit')
         return 'This endpoint hit'
 
+@app.route('/get_heatmap', methods=['GET', 'POST'])
+def correlation():
+    """
+    Creates a correlation table from a given list of SP500 companies.
+    :param list: List containing ticker symbols as strings
+    :return: correlation table with heatmap
+    """
+    if request.method == 'POST':
+        print(request.get_json('HeatMapInput'))
+        heatmapinput = request.get_json('HeatMapInput').values()
+        ticker_list = list(heatmapinput)
+        main_df = pd.read_csv('./sp_joined_closes.csv')
+        # print(main_df)
+        df = pd.DataFrame()
+
+        for a in range(len(ticker_list)):
+            array = main_df[ticker_list[a]].values
+            df['{}'.format(ticker_list[a])] = array
+
+        corr_table = df.corr().to_dict()
+    
+        # print(corr_table)
+        return corr_table
+
+
 if __name__ == '__main__':
     app.run(host='0.0.0.0', debug=True)

@@ -47,7 +47,7 @@ def graph_with_dma(ticker, window):
     :param window: x-Day Moving Average
     :return:
     """
-    with open('../sp500_joined_closes.csv', 'r') as f:
+    with open('../sp_joined_closes.csv', 'r') as f:
         tick_df = pd.read_csv(f)
         price_hist = tick_df['{}'.format(ticker)]
 
@@ -55,6 +55,7 @@ def graph_with_dma(ticker, window):
     x_axis = tick_df['datetime']
 
     rolling_average = tick_df['{}'.format(ticker)].rolling(int(('{}'.format(window)))).mean()
+    print(type(rolling_average))
 
     ax.set_title('20 Year Price Data for {}'.format(ticker))
     ax.set_xlabel('Time since 2000 (Years)')
@@ -73,5 +74,5 @@ def graph_with_dma(ticker, window):
 
 
 if __name__ == '__main__':
-    graph_test_compare(['CSCO', 'UPS', 'AAPL', 'GE', 'MSFT', 'IBM', 'BA', 'CVX'])
+    # graph_test_compare(['CSCO', 'UPS', 'AAPL', 'GE', 'MSFT', 'IBM', 'BA', 'CVX'])
     graph_with_dma('AAPL', 55)
