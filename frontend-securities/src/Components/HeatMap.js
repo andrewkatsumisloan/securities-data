@@ -43,6 +43,7 @@ const HeatMap = () => {
     }
 
     function drawAll(heatmapArray) {
+        // Alternative to visx heatmap library, custom heatmap
         var cnvs = document.getElementById("myCanvas");
         var cnv_width = cnvs.width;
         var cnv_height = cnvs.height;
@@ -59,9 +60,10 @@ const HeatMap = () => {
     
         var topMargin = 32;
         var leftMargin = 64;
+        var bottomMargin = 64;
     
-        var blockSizeH = (cnv_width - topMargin) / heatmapArray[0].length
-        var blockSizeV = (cnv_height - leftMargin) / heatmapArray[0].length
+        var blockSizeH = (cnv_width - leftMargin*2) / heatmapArray[0].length
+        var blockSizeV = (cnv_height - (topMargin + bottomMargin)) / heatmapArray[0].length
     
         ctx.fillStyle = '#fff0d3';
         ctx.fillRect(0, 0, cnv_width, cnv_height);
@@ -87,6 +89,25 @@ const HeatMap = () => {
                 ctx.fillText(heatmapArray[row][col].toFixed(3), leftMargin + col * blockSizeH + blockSizeH/2, topMargin + (row - 1) * blockSizeV + blockSizeV/2)
             }
         }
+        
+        // Create legend color gradient black --> red
+        var blockWidth = (cnv_width - leftMargin*2)/100
+        for (var i = 0; i < 100; i++) {
+            var scale = i/100
+            ctx.fillStyle = `rgb(
+                ${Math.floor(low_r * (1-scale) + high_r * scale)}, 
+                ${Math.floor(low_g * (1-scale) + high_g * scale)}, 
+                ${Math.floor(low_b * (1-scale) + high_b * scale)}
+            )`
+            ctx.fillRect(leftMargin + blockWidth*i, cnv_height - bottomMargin/2 - 15, blockWidth, 20);
+        }   
+
+        ctx.fillStyle = 'black';
+        ctx.fillText('Low', leftMargin/2 - 10, cnv_height - bottomMargin/2)
+        ctx.fillText('High', cnv_width - leftMargin/2 -20, cnv_height - bottomMargin/2)
+        ctx.fillText('Correlation', cnv_width/2, cnv_height - bottomMargin/2 + 30)
+
+
     }
     
     return (
