@@ -8,7 +8,7 @@ import requests
 import math
 import time
 
-sys.path.append('../')
+sys.path.append(os.path.abspath(os.path.dirname(os.path.dirname((__file__)))))
 from lib import PICKLE_PATH, JSON_DATA_PATH
 
 key = 'RFJECPTJLRRH42GDRRFPUBVA7ODHJZON'
@@ -28,7 +28,6 @@ payload = {
     'startDate': '946719000000',
     'needExtendedHoursData': 'false'
 }
-
 
 def list_tickers():
     with open(PICKLE_PATH, "rb") as f:

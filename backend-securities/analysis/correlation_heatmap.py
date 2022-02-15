@@ -28,6 +28,7 @@ def correlation(list):
         # print(corr_table)
         # print(type(corr_table))
 
+        print('This is the columns: ', corr_table.columns)
         ret_list = []
         for x in corr_table: 
             ret_list.append(corr_table[x].tolist())
@@ -36,6 +37,7 @@ def correlation(list):
         for x in ret_list: 
             pass
 
+        ret_list.insert(0, corr_table.columns.tolist())
         print(ret_list)
 
         sns.heatmap(corr_table, annot=True, annot_kws={"size":8})

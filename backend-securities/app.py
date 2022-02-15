@@ -69,13 +69,12 @@ def correlation():
         # plt.savefig('./corr_heatmap.png')
 
         ret_list = []
+        print(corr_table.columns)
         for x in corr_table: 
             ret_list.append(corr_table[x].tolist())
             # print(corr_table[x])
         
-        for x in ret_list: 
-            pass
-        
+        ret_list.insert(0, corr_table.columns.tolist())
         print(ret_list)
         
         # print(corr_table)
