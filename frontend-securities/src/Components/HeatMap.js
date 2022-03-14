@@ -36,10 +36,12 @@ const HeatMap = () => {
             },
             body: JSON.stringify(heatMapInput)
         })
-            .then(response => response.json())
-                .then(result => {
-                    setHeatMapData(result)
-                })
+        const results = await response.json() 
+        setHeatMapData(results)
+            // .then(response => response.json())
+            //     .then(result => {
+            //         setHeatMapData(result)
+            //     })
     }
 
     function drawAll(heatmapArray) {
