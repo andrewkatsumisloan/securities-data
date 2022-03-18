@@ -17,8 +17,8 @@ const TickerLookup = () => {
     //     console.log(tickerData)
     // }, [tickerData]);
 
-    async function getHistoricalData(ticker) {
-        const response = await fetch("http://localhost:5000/ticker_entry", {
+    const getHistoricalData = (ticker) => {
+        const response = fetch("http://localhost:5000/ticker_entry", {
             method: 'POST', // *GET, POST, PUT, DELETE, etc.
             mode: 'cors', // no-cors, *cors, same-origin
             cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
@@ -37,8 +37,8 @@ const TickerLookup = () => {
                 })
     }
 
-    async function getCorrelationData(ticker_list) {
-        const response = await fetch("http://localhost:5000/correlation_entry", {
+    const getCorrelationData = (ticker_list) => {
+        const response = fetch("http://localhost:5000/correlation_entry", {
             method: 'POST', // *GET, POST, PUT, DELETE, etc.
             mode: 'cors', // no-cors, *cors, same-origin
             cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached

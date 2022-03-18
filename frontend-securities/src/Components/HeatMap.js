@@ -25,8 +25,8 @@ const HeatMap = () => {
         }
     }, [heatMapData])
 
-    async function getHeatMapData(heatMapInput) {
-        const response = await fetch("http://localhost:5000/get_heatmap", {
+    const getHeatMapData = (heatMapInput) => {
+        const response = fetch("http://localhost:5000/get_heatmap", {
             method: 'POST', // *GET, POST, PUT, DELETE, etc.
             mode: 'cors', // no-cors, *cors, same-origin
             cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
